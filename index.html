@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- Chosen Palette: Energia, Esporte e Vida -->
-<!-- Application Structure Plan: A aplicação foi estruturada em seções temáticas e navegáveis para transformar o guia estático em uma experiência interativa. A arquitetura inclui: 1) Uma seção de Paleta de Cores interativa para tangibilizar a identidade da marca. 2) Uma seção de Recursos organizada em cards para fácil leitura e acesso. 3) Um Fluxograma de Processos recriado com HTML/CSS (sem SVG/Mermaid) para visualizar o caminho do projeto de forma clara e dinâmica. A navegação é facilitada por um cabeçalho fixo, melhorando a usabilidade e permitindo que o usuário explore o conteúdo de forma não linear. Esta estrutura foi escolhida para organizar a informação de maneira lógica e visualmente engajadora, servindo tanto como um guia interno quanto um portfólio externo. -->
-<!-- Visualization & Content Choices: 1) Paleta de Cores -> Meta: Informar/Inspirar -> Apresentação: Swatches de cores interativos (HTML/CSS) -> Interação: Hover para revelar detalhes. Justificativa: Mais didático e visual que uma lista. 2) Recursos (Sites/Artigos) -> Meta: Organizar/Informar -> Apresentação: Layout de cards (HTML/Tailwind) -> Interação: Links externos. Justificativa: Melhora a escaneabilidade e organização visual. 3) Fluxograma -> Meta: Mostrar Processo -> Apresentação: Diagrama construído com divs e Tailwind CSS. -> Interação: Efeitos de hover nos passos. Justificativa: Atende à restrição de não usar SVG/Mermaid, mantendo uma representação visual clara e estilizada do processo. -->
+<!-- Application Structure Plan: A aplicação foi reestruturada para incluir seções detalhadas de Modelo de Negócios e Portfólio de Produtos, além das já existentes. A arquitetura agora é: 1) Hero Section. 2) Modelo de Negócios Robusto (9 blocos com sugestões de melhoria). 3) Portfólio de Produtos. 4) Paleta de Cores. 5) Recursos de Apoio. 6) Roadmap (Fluxograma). 7) Contato. A navegação foi atualizada para refletir essa estrutura mais completa, que transforma o guia em uma ferramenta de apresentação e consulta, organizando a informação de forma lógica e aprofundada para potenciais parceiros. -->
+<!-- Visualization & Content Choices: 1) Modelo de Negócios -> Meta: Informar/Analisar -> Apresentação: Grade de cards (HTML/CSS) -> Interação: Nenhuma. Justificativa: Facilita a leitura e compreensão de cada fase do Canvas. 2) Portfólio -> Meta: Apresentar -> Apresentação: Grade de cards de produtos (HTML/CSS). Justificativa: Simples e visualmente atraente para exibir os itens. 3) Fluxograma -> Meta: Mostrar Processo -> Apresentação: Diagrama com divs e Tailwind. -> Interação: Hover. Justificativa: Mantém a representação visual clara sem bibliotecas externas. -->
 <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 <html lang="pt-BR">
 <head>
@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Poppins', sans-serif; }
+        body { font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
         :root {
             --primary: #FF4D00;
             --secondary: #00B2FF;
@@ -30,18 +30,9 @@
         .section-title { border-left: 4px solid var(--primary); padding-left: 1rem; }
         .color-swatch { transition: transform 0.3s ease; }
         .color-swatch:hover { transform: scale(1.05); }
-        .resource-card, .flow-step { transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; }
-        .resource-card:hover, .flow-step:hover { transform: translateY(-4px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1); }
+        .resource-card, .flow-step, .business-card { transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; }
+        .resource-card:hover, .flow-step:hover, .business-card:hover { transform: translateY(-4px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1); }
         
-        .flow-connector::after {
-            content: '▼';
-            display: block;
-            font-size: 1.5rem;
-            color: var(--secondary);
-            margin: 0.5rem 0;
-            text-align: center;
-        }
-
         @media (min-width: 1024px) {
             .flow-phase {
                 position: relative;
@@ -95,25 +86,114 @@
                 </div>
             </div>
             <div class="hidden md:flex items-center space-x-6">
-                <a href="#palette" class="text-gray-600 hover:text-primary transition duration-300">Paleta de Cores</a>
+                <a href="#modelo-negocios" class="text-gray-600 hover:text-primary transition duration-300">Modelo de Negócios</a>
+                <a href="#produtos" class="text-gray-600 hover:text-primary transition duration-300">Portfólio</a>
                 <a href="#resources" class="text-gray-600 hover:text-primary transition duration-300">Recursos</a>
                 <a href="#roadmap" class="text-gray-600 hover:text-primary transition duration-300">Roadmap</a>
+                <a href="#contato" class="text-gray-600 hover:text-primary transition duration-300">Contato</a>
             </div>
             <button id="mobile-menu-button" class="md:hidden text-dark">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
             </button>
         </nav>
         <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
-            <a href="#palette" class="block py-2 text-gray-600 hover:text-primary">Paleta de Cores</a>
+            <a href="#modelo-negocios" class="block py-2 text-gray-600 hover:text-primary">Modelo de Negócios</a>
+            <a href="#produtos" class="block py-2 text-gray-600 hover:text-primary">Portfólio</a>
             <a href="#resources" class="block py-2 text-gray-600 hover:text-primary">Recursos</a>
             <a href="#roadmap" class="block py-2 text-gray-600 hover:text-primary">Roadmap</a>
+            <a href="#contato" class="block py-2 text-gray-600 hover:text-primary">Contato</a>
         </div>
     </header>
 
     <main class="container mx-auto px-6 py-10">
         <section class="text-center mb-16">
             <h2 class="text-4xl md:text-5xl font-bold mb-3">O Guia Estratégico da Sua Empresa Jr.</h2>
-            <p class="text-lg text-gray-600 max-w-3xl mx-auto">Transformamos nosso plano em uma ferramenta interativa. Explore os recursos, entenda nossa identidade e siga o roadmap para o sucesso.</p>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto">Transformamos nosso plano em uma ferramenta interativa. Explore nosso modelo de negócios, produtos, recursos e siga o roadmap para o sucesso.</p>
+        </section>
+
+        <section id="modelo-negocios" class="mb-16">
+            <h3 class="text-3xl font-bold mb-2 section-title">Modelo de Negócios Robusto</h3>
+            <p class="text-gray-700 mb-8 pl-5">Desenvolvemos um modelo completo, baseado na metodologia Canvas, para garantir uma operação estruturada. Cada bloco foi pensado estrategicamente para nosso contexto escolar e inclui sugestões de melhoria contínua.</p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="business-card bg-white p-6 rounded-lg shadow-lg">
+                    <h4 class="font-bold text-xl mb-3 text-secondary">1. Segmento de Clientes</h4>
+                    <p><strong>Quem atendemos?</strong> Alunos, professores, funcionários do CEBB e seus familiares.</p>
+                    <p class="mt-3 pt-3 border-t text-sm"><strong>💡 Sugestão de Melhoria:</strong> Criar "embaixadores" em cada turma para divulgar os produtos e coletar feedback, aumentando o alcance.</p>
+                </div>
+                <div class="business-card bg-white p-6 rounded-lg shadow-lg">
+                    <h4 class="font-bold text-xl mb-3 text-secondary">2. Proposta de Valor</h4>
+                    <p><strong>O que oferecemos?</strong> Acesso conveniente a produtos esportivos de qualidade e fomento ao espírito esportivo na escola.</p>
+                    <p class="mt-3 pt-3 border-t text-sm"><strong>💡 Sugestão de Melhoria:</strong> Oferecer kits personalizados (ex: "Kit Vôlei") e promover pequenos campeonatos para fortalecer a marca.</p>
+                </div>
+                <div class="business-card bg-white p-6 rounded-lg shadow-lg">
+                    <h4 class="font-bold text-xl mb-3 text-secondary">3. Canais</h4>
+                    <p><strong>Como chegamos aos clientes?</strong> Ponto de venda físico, redes sociais (Instagram) e grupos de WhatsApp.</p>
+                    <p class="mt-3 pt-3 border-t text-sm"><strong>💡 Sugestão de Melhoria:</strong> Criar um catálogo digital em PDF com link para encomendas diretas via WhatsApp Business.</p>
+                </div>
+                <div class="business-card bg-white p-6 rounded-lg shadow-lg">
+                    <h4 class="font-bold text-xl mb-3 text-secondary">4. Relacionamento</h4>
+                    <p><strong>Como interagimos?</strong> Atendimento pessoal, enquetes e comunicação constante nas redes sociais.</p>
+                    <p class="mt-3 pt-3 border-t text-sm"><strong>💡 Sugestão de Melhoria:</strong> Implementar um "Clube de Vantagens" com descontos ou brindes para clientes fiéis.</p>
+                </div>
+                <div class="business-card bg-white p-6 rounded-lg shadow-lg">
+                    <h4 class="font-bold text-xl mb-3 text-secondary">5. Fontes de Receita</h4>
+                    <p><strong>Como ganhamos dinheiro?</strong> Venda direta de produtos com margem de lucro. Pagamentos via PIX e dinheiro.</p>
+                    <p class="mt-3 pt-3 border-t text-sm"><strong>💡 Sugestão de Melhoria:</strong> Explorar a venda de produtos sob encomenda (itens de maior valor) ou rifas especiais.</p>
+                </div>
+                <div class="business-card bg-white p-6 rounded-lg shadow-lg">
+                    <h4 class="font-bold text-xl mb-3 text-secondary">6. Recursos Principais</h4>
+                    <p><strong>O que precisamos?</strong> Capital para estoque, espaço físico, equipe engajada e acesso à internet.</p>
+                    <p class="mt-3 pt-3 border-t text-sm"><strong>💡 Sugestão de Melhoria:</strong> Firmar parceria com a direção da escola para oficializar o espaço de vendas e obter apoio institucional.</p>
+                </div>
+                <div class="business-card bg-white p-6 rounded-lg shadow-lg">
+                    <h4 class="font-bold text-xl mb-3 text-secondary">7. Atividades-Chave</h4>
+                    <p><strong>O que fazemos?</strong> Gestão de estoque, marketing, vendas, atendimento e controle financeiro.</p>
+                    <p class="mt-3 pt-3 border-t text-sm"><strong>💡 Sugestão de Melhoria:</strong> Realizar "Dias D" temáticos (ex: "Dia do Basquete") com promoções focadas em uma modalidade.</p>
+                </div>
+                <div class="business-card bg-white p-6 rounded-lg shadow-lg">
+                    <h4 class="font-bold text-xl mb-3 text-secondary">8. Parcerias Principais</h4>
+                    <p><strong>Com quem contamos?</strong> Direção da escola, professores de educação física e fornecedores.</p>
+                    <p class="mt-3 pt-3 border-t text-sm"><strong>💡 Sugestão de Melhoria:</strong> Buscar parcerias com comércios locais para oferecer descontos cruzados e ampliar a visibilidade.</p>
+                </div>
+                <div class="business-card bg-white p-6 rounded-lg shadow-lg">
+                    <h4 class="font-bold text-xl mb-3 text-secondary">9. Estrutura de Custos</h4>
+                    <p><strong>Quais são nossos gastos?</strong> Custo de aquisição dos produtos, materiais de divulgação e possíveis taxas.</p>
+                    <p class="mt-3 pt-3 border-t text-sm"><strong>💡 Sugestão de Melhoria:</strong> Criar uma planilha detalhada para acompanhar o fluxo de caixa mensalmente e garantir a saúde financeira.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="produtos" class="mb-16">
+            <h3 class="text-3xl font-bold mb-2 section-title">Portfólio de Produtos</h3>
+            <p class="text-gray-700 mb-8 pl-5">Apresentamos uma seleção dos nossos principais produtos, escolhidos com base nas preferências da nossa comunidade escolar.</p>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                <div class="resource-card bg-white rounded-lg shadow-lg p-4 text-center">
+                    <div class="w-full h-32 bg-gray-200 rounded-md mb-3 flex items-center justify-center text-gray-400">[Imagem de Camisa de Time]</div>
+                    <h5 class="font-bold">Camisa de Time</h5>
+                    <p class="text-primary font-semibold">R$ 150,00</p>
+                </div>
+                 <div class="resource-card bg-white rounded-lg shadow-lg p-4 text-center">
+                    <div class="w-full h-32 bg-gray-200 rounded-md mb-3 flex items-center justify-center text-gray-400">[Imagem de Bola de Basquete]</div>
+                    <h5 class="font-bold">Bola de Basquete</h5>
+                    <p class="text-primary font-semibold">R$ 299,00</p>
+                </div>
+                 <div class="resource-card bg-white rounded-lg shadow-lg p-4 text-center">
+                    <div class="w-full h-32 bg-gray-200 rounded-md mb-3 flex items-center justify-center text-gray-400">[Imagem de Tênis de Corrida]</div>
+                    <h5 class="font-bold">Tênis de Corrida</h5>
+                    <p class="text-primary font-semibold">R$ 699,00</p>
+                </div>
+                <div class="resource-card bg-white rounded-lg shadow-lg p-4 text-center">
+                    <div class="w-full h-32 bg-gray-200 rounded-md mb-3 flex items-center justify-center text-gray-400">[Imagem de Luva de Boxe]</div>
+                    <h5 class="font-bold">Luva de Boxe</h5>
+                    <p class="text-primary font-semibold">R$ 199,00</p>
+                </div>
+                <div class="resource-card bg-white rounded-lg shadow-lg p-4 text-center">
+                    <div class="w-full h-32 bg-gray-200 rounded-md mb-3 flex items-center justify-center text-gray-400">[Imagem de Kimono]</div>
+                    <h5 class="font-bold">Kimono</h5>
+                    <p class="text-primary font-semibold">R$ 899,00</p>
+                </div>
+            </div>
+             <p class="text-center mt-8 text-gray-700">E muito mais! Entre em contato para conhecer nosso catálogo completo.</p>
         </section>
 
         <section id="palette" class="mb-16">
@@ -260,6 +340,17 @@
             </div>
         </section>
 
+        <section id="contato" class="bg-dark text-white p-12 rounded-lg">
+            <div class="text-center">
+                <h3 class="text-3xl font-bold mb-4">Pronto para entrar em jogo?</h3>
+                <p class="text-gray-300 mb-8 max-w-2xl mx-auto">Siga-nos nas redes sociais para ficar por dentro das novidades ou envie uma mensagem para fazer seu pedido!</p>
+                <div class="flex justify-center items-center space-x-6">
+                    <a href="#" class="bg-primary text-white px-6 py-3 rounded-full font-bold hover:bg-opacity-90 transition duration-300">Siga no Instagram</a>
+                    <a href="#" class="border-2 border-white text-white px-6 py-3 rounded-full font-bold hover:bg-white hover:text-dark transition duration-300">Fale no WhatsApp</a>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <footer class="bg-white border-t mt-10">
@@ -277,10 +368,14 @@
                 mobileMenu.classList.toggle('hidden');
             });
             
-            const navLinks = document.querySelectorAll('#mobile-menu a');
+            const navLinks = document.querySelectorAll('#mobile-menu a, nav a');
             navLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenu.classList.add('hidden');
+                link.addEventListener('click', (e) => {
+                    if (link.hash !== "") {
+                        if(!mobileMenu.classList.contains('hidden')) {
+                           mobileMenu.classList.add('hidden');
+                        }
+                    }
                 });
             });
         });
