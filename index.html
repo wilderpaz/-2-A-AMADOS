@@ -1,1 +1,298 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Empresa Jr. Amados - CEBB</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        /* Paleta de Cores Sugerida */
+        :root {
+            --primary: #FF4D00; /* Laranja Vibrante (Energia) */
+            --secondary: #00B2FF; /* Azul Elétrico (Vitalidade) */
+            --accent: #A2FF00; /* Verde Limão (Vida) */
+            --dark: #1A1A1A; /* Grafite Escuro (Profissionalismo) */
+            --light: #F5F5F5; /* Cinza Claro (Fundo) */
+        }
+        .bg-primary { background-color: var(--primary); }
+        .text-primary { color: var(--primary); }
+        .bg-secondary { background-color: var(--secondary); }
+        .text-secondary { color: var(--secondary); }
+        .bg-accent { background-color: var(--accent); }
+        .text-accent { color: var(--accent); }
+        .bg-dark { background-color: var(--dark); }
+        .text-dark { color: var(--dark); }
+        .bg-light { background-color: var(--light); }
+        .text-light { color: var(--light); }
+        .section-title {
+            border-left: 5px solid var(--primary);
+            padding-left: 15px;
+        }
+        .flowchart-step {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .flowchart-step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-light text-dark">
+
+    <!-- Cabeçalho e Navegação -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <!-- Espaço para a Logomarca -->
+                <div class="w-12 h-12 bg-dark rounded-full flex items-center justify-center text-white font-bold text-lg">
+                    EJ
+                </div>
+                <h1 class="text-xl font-bold text-dark">Empresa Jr. Amados</h1>
+            </div>
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="#modelo-negocios" class="text-gray-600 hover:text-primary transition duration-300">Modelo de Negócios</a>
+                <a href="#produtos" class="text-gray-600 hover:text-primary transition duration-300">Produtos</a>
+                <a href="#recursos" class="text-gray-600 hover:text-primary transition duration-300">Recursos</a>
+                <a href="#fluxograma" class="text-gray-600 hover:text-primary transition duration-300">Fluxograma</a>
+                <a href="#contato" class="bg-primary text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition duration-300">Contato</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-dark">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </nav>
+         <!-- Menu Mobile -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+            <a href="#modelo-negocios" class="block py-2 text-gray-600 hover:text-primary">Modelo de Negócios</a>
+            <a href="#produtos" class="block py-2 text-gray-600 hover:text-primary">Produtos</a>
+            <a href="#recursos" class="block py-2 text-gray-600 hover:text-primary">Recursos</a>
+            <a href="#fluxograma" class="block py-2 text-gray-600 hover:text-primary">Fluxograma</a>
+            <a href="#contato" class="block mt-2 bg-primary text-white px-4 py-2 rounded-full text-center">Contato</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+
+        <!-- Seção Hero -->
+        <section class="text-center mb-20">
+            <h2 class="text-4xl md:text-6xl font-bold mb-4">Movimente-se. Conquiste. <span class="text-primary">Inspire.</span></h2>
+            <p class="text-lg text-gray-700 max-w-3xl mx-auto mb-8">A Empresa Jr. Amados nasceu da paixão pelo esporte e da vontade de empreender. Oferecemos os melhores equipamentos para a comunidade do CEBB, incentivando um estilo de vida ativo e saudável.</p>
+            <a href="#produtos" class="bg-secondary text-white px-8 py-3 rounded-full font-bold text-lg hover:bg-opacity-90 transition duration-300">Conheça nossos Produtos</a>
+        </section>
+
+        <!-- Seção Modelo de Negócios Robusto -->
+        <section id="modelo-negocios" class="mb-20">
+            <h3 class="text-3xl font-bold mb-6 section-title">Nosso Modelo de Negócios</h3>
+            <p class="text-gray-700 mb-8">Desenvolvemos um modelo de negócios completo, baseado na metodologia Canvas, para garantir uma operação estruturada e com visão de futuro. Cada bloco foi pensado estrategicamente para o nosso contexto escolar.</p>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Bloco 1: Segmento de Clientes -->
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h4 class="font-bold text-xl mb-3 text-secondary">1. Segmento de Clientes</h4>
+                    <p><strong>Quem atendemos?</strong> Alunos, professores, funcionários do CEBB e seus familiares.</p>
+                    <p class="mt-2"><strong>Sugestão de Melhoria:</strong> Criar um programa de "embaixadores" em cada turma para divulgar os produtos e coletar feedback, aumentando o alcance e o engajamento.</p>
+                </div>
+
+                <!-- Bloco 2: Proposta de Valor -->
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h4 class="font-bold text-xl mb-3 text-secondary">2. Proposta de Valor</h4>
+                    <p><strong>O que oferecemos?</strong> Acesso conveniente a produtos esportivos de qualidade, curadoria de itens mais desejados e fomento ao espírito esportivo na escola.</p>
+                     <p class="mt-2"><strong>Sugestão de Melhoria:</strong> Oferecer kits personalizados (ex: "Kit Vôlei" com joelheira + bola) e promover pequenos campeonatos ou eventos esportivos para fortalecer a marca.</p>
+                </div>
+
+                <!-- Bloco 3: Canais -->
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h4 class="font-bold text-xl mb-3 text-secondary">3. Canais</h4>
+                    <p><strong>Como chegamos aos clientes?</strong> Ponto de venda físico na escola, redes sociais (Instagram) e grupos de WhatsApp.</p>
+                    <p class="mt-2"><strong>Sugestão de Melhoria:</strong> Criar um catálogo digital em PDF com link para encomendas diretas via WhatsApp Business, agilizando o processo de compra.</p>
+                </div>
+
+                <!-- Bloco 4: Relacionamento com Clientes -->
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h4 class="font-bold text-xl mb-3 text-secondary">4. Relacionamento</h4>
+                    <p><strong>Como interagimos?</strong> Atendimento pessoal e amigável, enquetes e comunicação constante nas redes sociais.</p>
+                     <p class="mt-2"><strong>Sugestão de Melhoria:</strong> Implementar um "Clube de Vantagens" com descontos progressivos ou brindes para clientes que comprarem com frequência.</p>
+                </div>
+
+                <!-- Bloco 5: Fontes de Receita -->
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h4 class="font-bold text-xl mb-3 text-secondary">5. Fontes de Receita</h4>
+                    <p><strong>Como ganhamos dinheiro?</strong> Venda direta de produtos com margem de lucro. Pagamentos via PIX e dinheiro.</p>
+                    <p class="mt-2"><strong>Sugestão de Melhoria:</strong> Explorar a venda de produtos sob encomenda (itens de maior valor, como bicicletas) ou a organização de rifas de produtos especiais para levantar capital.</p>
+                </div>
+
+                <!-- Bloco 6: Recursos Principais -->
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h4 class="font-bold text-xl mb-3 text-secondary">6. Recursos Principais</h4>
+                    <p><strong>O que precisamos?</strong> Capital inicial para estoque, espaço físico para vendas, equipe de alunos engajada e acesso à internet.</p>
+                    <p class="mt-2"><strong>Sugestão de Melhoria:</strong> Firmar uma parceria com a direção da escola para oficializar o espaço de vendas e conseguir apoio institucional.</p>
+                </div>
+
+                 <!-- Bloco 7: Atividades-Chave -->
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h4 class="font-bold text-xl mb-3 text-secondary">7. Atividades-Chave</h4>
+                    <p><strong>O que fazemos?</strong> Compra e gestão de estoque, marketing e divulgação, vendas e atendimento, controle financeiro.</p>
+                    <p class="mt-2"><strong>Sugestão de Melhoria:</strong> Realizar "Dias D" temáticos (ex: "Dia do Basquete") com promoções focadas em uma modalidade para impulsionar vendas de nicho.</p>
+                </div>
+
+                 <!-- Bloco 8: Parcerias Principais -->
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h4 class="font-bold text-xl mb-3 text-secondary">8. Parcerias Principais</h4>
+                    <p><strong>Com quem contamos?</strong> Direção da escola (apoio institucional), professores de educação física (divulgação) e fornecedores de produtos.</p>
+                    <p class="mt-2"><strong>Sugestão de Melhoria:</strong> Buscar parcerias com pequenos comércios locais (ex: lanchonetes, papelarias) para oferecer descontos cruzados e ampliar a visibilidade.</p>
+                </div>
+
+                 <!-- Bloco 9: Estrutura de Custos -->
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h4 class="font-bold text-xl mb-3 text-secondary">9. Estrutura de Custos</h4>
+                    <p><strong>Quais são nossos gastos?</strong> Custo de aquisição dos produtos (CMV), materiais de divulgação e possíveis taxas de transação.</p>
+                    <p class="mt-2"><strong>Sugestão de Melhoria:</strong> Criar uma planilha detalhada para acompanhar o fluxo de caixa mensalmente, garantindo que a empresa se mantenha saudável financeiramente.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Produtos -->
+        <section id="produtos" class="mb-20">
+            <h3 class="text-3xl font-bold mb-8 section-title">Nossos Produtos</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                <!-- Exemplo de cards de produtos -->
+                <div class="bg-white rounded-lg shadow-lg p-4 text-center">
+                    <div class="w-full h-32 bg-gray-200 rounded-md mb-3 flex items-center justify-center">[Imagem de Camisa de Time]</div>
+                    <h5 class="font-bold">Camisa de Time</h5>
+                    <p class="text-primary font-semibold">R$ 150,00</p>
+                </div>
+                 <div class="bg-white rounded-lg shadow-lg p-4 text-center">
+                    <div class="w-full h-32 bg-gray-200 rounded-md mb-3 flex items-center justify-center">[Imagem de Bola de Basquete]</div>
+                    <h5 class="font-bold">Bola de Basquete</h5>
+                    <p class="text-primary font-semibold">R$ 299,00</p>
+                </div>
+                 <div class="bg-white rounded-lg shadow-lg p-4 text-center">
+                    <div class="w-full h-32 bg-gray-200 rounded-md mb-3 flex items-center justify-center">[Imagem de Tênis de Corrida]</div>
+                    <h5 class="font-bold">Tênis de Corrida</h5>
+                    <p class="text-primary font-semibold">R$ 699,00</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-4 text-center">
+                    <div class="w-full h-32 bg-gray-200 rounded-md mb-3 flex items-center justify-center">[Imagem de Luva de Boxe]</div>
+                    <h5 class="font-bold">Luva de Boxe</h5>
+                    <p class="text-primary font-semibold">R$ 199,00</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-4 text-center">
+                    <div class="w-full h-32 bg-gray-200 rounded-md mb-3 flex items-center justify-center">[Imagem de Kimono]</div>
+                    <h5 class="font-bold">Kimono</h5>
+                    <p class="text-primary font-semibold">R$ 899,00</p>
+                </div>
+            </div>
+            <p class="text-center mt-8 text-gray-700">E muito mais! Entre em contato para conhecer nosso catálogo completo.</p>
+        </section>
+
+        <!-- Seção de Recursos e Materiais -->
+        <section id="recursos" class="mb-20 bg-white p-8 rounded-lg shadow-lg">
+            <h3 class="text-3xl font-bold mb-6 section-title">Recursos para Empreendedores</h3>
+            <p class="text-gray-700 mb-8">A jornada empreendedora é feita de aprendizado contínuo. Separamos alguns materiais incríveis para auxiliar vocês nesse caminho.</p>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <h4 class="font-bold text-xl mb-3 text-secondary">Sites e Portais</h4>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><a href="https://www.sebrae.com.br" target="_blank" class="hover:text-primary"><strong>Sebrae:</strong></a> A maior referência em empreendedorismo no Brasil. Oferece cursos, artigos e ferramentas gratuitas sobre plano de negócios, finanças e marketing.</li>
+                        <li><a href="https://endeavor.org.br" target="_blank" class="hover:text-primary"><strong>Endeavor Brasil:</strong></a> Conteúdo de alta qualidade com artigos, e-books e vídeos para quem quer pensar grande.</li>
+                         <li><a href="https://www.canva.com" target="_blank" class="hover:text-primary"><strong>Canva:</strong></a> Ferramenta essencial para criar posts para redes sociais, cartazes e até mesmo a apresentação do projeto de forma profissional.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-xl mb-3 text-secondary">Artigos e Leituras Recomendadas</h4>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><a href="https://www.sebrae.com.br/sites/PortalSebrae/artigos/como-elaborar-um-plano-de-negocio,37d2438af1c92410VgnVCM100000b272010aRCRD" target="_blank" class="hover:text-primary"><strong>"Como elaborar um Plano de Negócio" (Sebrae):</strong></a> Um guia completo e didático.</li>
+                        <li><a href="https://endeavor.org.br/planejamento-estrategico/business-model-canvas/" target="_blank" class="hover:text-primary"><strong>"Business Model Canvas: O que é e como fazer" (Endeavor):</strong></a> Para aprofundar no modelo que apresentamos aqui.</li>
+                        <li><a href="https://rockcontent.com/br/blog/marketing-para-instagram/" target="_blank" class="hover:text-primary"><strong>"Marketing no Instagram: O Guia Completo" (Rock Content):</strong></a> Dicas valiosas para bombar o perfil da empresa.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Fluxograma -->
+        <section id="fluxograma" class="mb-20">
+            <h3 class="text-3xl font-bold mb-8 section-title">Passo a Passo para o Sucesso</h3>
+            <p class="text-gray-700 mb-10 text-center max-w-3xl mx-auto">Este fluxograma mostra o caminho claro e objetivo, desde a ideia inicial até a apresentação do projeto para um potencial patrocinador ou para a direção da escola.</p>
+            
+            <div class="mermaid text-center" style="width: 100%; margin: 0 auto;">
+                graph TD
+                    A[💡 Fase 1: Ideação e Estrutura] --> B{Definir Missão e Equipes};
+                    B --> C[Pesquisa de Mercado];
+                    C --> D[Análise de Concorrência e Fornecedores];
+                    
+                    subgraph "Planejamento (Plano de Negócios)"
+                        D --> E[📝 Fase 2: Construção do Plano];
+                        E --> F{Elaborar Canvas do Modelo de Negócios};
+                        F --> G[Definir Mix de Produtos e Preços];
+                        G --> H[Criar Plano de Marketing];
+                        H --> I[Projetar Análise Financeira];
+                    end
+                    
+                    I --> J[📄 Fase 3: Consolidação];
+                    J --> K{Escrever o Documento Final do Plano de Negócios};
+                    K --> L[Criar Apresentação em Slides];
+                    
+                    L --> M[🚀 Fase 4: Apresentação];
+                    M --> N{Agendar Reunião com Patrocinador/Direção};
+                    N --> O[Realizar o "Pitch" da Empresa Jr.];
+                    O --> P[🏆 Obter Aprovação e Capital!];
+
+                    style A fill:#FF4D00,stroke:#333,stroke-width:2px,color:#fff
+                    style E fill:#00B2FF,stroke:#333,stroke-width:2px,color:#fff
+                    style J fill:#A2FF00,stroke:#333,stroke-width:2px,color:#333
+                    style M fill:#1A1A1A,stroke:#333,stroke-width:2px,color:#fff
+                    style P fill:gold,stroke:#333,stroke-width:2px,color:#333
+            </div>
+        </section>
+
+        <!-- Seção de Contato -->
+        <section id="contato" class="bg-dark text-white p-12 rounded-lg">
+            <div class="text-center">
+                <h3 class="text-3xl font-bold mb-4">Pronto para entrar em jogo?</h3>
+                <p class="text-gray-300 mb-8 max-w-2xl mx-auto">Siga-nos nas redes sociais para ficar por dentro das novidades ou envie uma mensagem para fazer seu pedido!</p>
+                <div class="flex justify-center items-center space-x-6">
+                    <a href="#" class="bg-primary text-white px-6 py-3 rounded-full font-bold hover:bg-opacity-90 transition duration-300">Siga no Instagram</a>
+                    <a href="#" class="border-2 border-white text-white px-6 py-3 rounded-full font-bold hover:bg-white hover:text-dark transition duration-300">Fale no WhatsApp</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="bg-white mt-20">
+        <div class="container mx-auto px-6 py-6 text-center text-gray-600">
+            <p>&copy; 2025 Empresa Jr. Amados - CEBB. Todos os direitos reservados.</p>
+            <p class="text-sm">Um projeto de empreendedorismo do 2º Ano A.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Lógica para o menu mobile
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Lógica para fechar o menu ao clicar em um link
+        const navLinks = document.querySelectorAll('#mobile-menu a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
 
