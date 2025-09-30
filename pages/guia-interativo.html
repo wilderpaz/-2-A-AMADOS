@@ -1,1 +1,268 @@
 
+<!DOCTYPE html>
+<!-- Chosen Palette: Energia, Esporte e Vida -->
+<!-- Application Structure Plan: A aplicação foi estruturada em seções temáticas e navegáveis para transformar o guia estático em uma experiência interativa. A arquitetura inclui: 1) Uma seção de Paleta de Cores interativa para tangibilizar a identidade da marca. 2) Uma seção de Recursos organizada em cards para fácil leitura e acesso. 3) Um Fluxograma de Processos recriado com HTML/CSS (sem SVG/Mermaid) para visualizar o caminho do projeto de forma clara e dinâmica. A navegação é facilitada por um cabeçalho fixo, melhorando a usabilidade e permitindo que o usuário explore o conteúdo de forma não linear. Esta estrutura foi escolhida para organizar a informação de maneira lógica e visualmente engajadora, servindo tanto como um guia interno quanto um portfólio externo. -->
+<!-- Visualization & Content Choices: 1) Paleta de Cores -> Meta: Informar/Inspirar -> Apresentação: Swatches de cores interativos (HTML/CSS) -> Interação: Hover para revelar detalhes. Justificativa: Mais didático e visual que uma lista. 2) Recursos (Sites/Artigos) -> Meta: Organizar/Informar -> Apresentação: Layout de cards (HTML/Tailwind) -> Interação: Links externos. Justificativa: Melhora a escaneabilidade e organização visual. 3) Fluxograma -> Meta: Mostrar Processo -> Apresentação: Diagrama construído com divs e Tailwind CSS. -> Interação: Efeitos de hover nos passos. Justificativa: Atende à restrição de não usar SVG/Mermaid, mantendo uma representação visual clara e estilizada do processo. -->
+<!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Interativo - Empresa Jr. Amados</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        :root {
+            --primary: #FF4D00;
+            --secondary: #00B2FF;
+            --accent: #A2FF00;
+            --dark: #1A1A1A;
+            --light: #F5F5F5;
+        }
+        .bg-primary { background-color: var(--primary); }
+        .text-primary { color: var(--primary); }
+        .bg-secondary { background-color: var(--secondary); }
+        .text-secondary { color: var(--secondary); }
+        .border-primary { border-color: var(--primary); }
+        .section-title { border-left: 4px solid var(--primary); padding-left: 1rem; }
+        .color-swatch { transition: transform 0.3s ease; }
+        .color-swatch:hover { transform: scale(1.05); }
+        .resource-card, .flow-step { transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; }
+        .resource-card:hover, .flow-step:hover { transform: translateY(-4px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1); }
+        .flow-connector::after {
+            content: '▼';
+            display: block;
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin: 0.5rem 0;
+            text-align: center;
+        }
+        @media (min-width: 1024px) {
+            .flow-phase { position: relative; padding-bottom: 2.5rem; }
+            .flow-connector::after {
+                content: '►';
+                position: absolute;
+                top: 40%;
+                right: -25px;
+                transform: translateY(-50%);
+                margin: 0;
+            }
+             .flow-phase:last-child .flow-connector::after {
+                content: '🏆';
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-light text-dark">
+
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <div class="w-14 h-14 bg-dark rounded-full flex items-center justify-center text-white font-bold text-2xl border-2 border-white shadow-lg">
+                    EJ
+                </div>
+                <div>
+                    <h1 class="text-lg font-bold text-dark">Empresa Jr. Amados</h1>
+                    <p class="text-sm text-gray-500">Guia de Negócios</p>
+                </div>
+            </div>
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="#palette" class="text-gray-600 hover:text-primary transition duration-300">Paleta de Cores</a>
+                <a href="#resources" class="text-gray-600 hover:text-primary transition duration-300">Recursos</a>
+                <a href="#roadmap" class="text-gray-600 hover:text-primary transition duration-300">Roadmap</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-dark">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+            <a href="#palette" class="block py-2 text-gray-600 hover:text-primary">Paleta de Cores</a>
+            <a href="#resources" class="block py-2 text-gray-600 hover:text-primary">Recursos</a>
+            <a href="#roadmap" class="block py-2 text-gray-600 hover:text-primary">Roadmap</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-10">
+        <section class="text-center mb-16">
+            <h2 class="text-4xl md:text-5xl font-bold mb-3">O Guia Estratégico da Sua Empresa Jr.</h2>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto">Transformamos nosso plano em uma ferramenta interativa. Explore os recursos, entenda nossa identidade e siga o roadmap para o sucesso.</p>
+        </section>
+
+        <section id="palette" class="mb-16">
+            <h3 class="text-3xl font-bold mb-2 section-title">Paleta de Cores: Energia, Esporte e Vida</h3>
+            <p class="text-gray-700 mb-8 pl-5">Nossa identidade visual é a primeira impressão da marca. Cada cor foi escolhida para comunicar nossos valores de dinamismo, saúde e profissionalismo. Passe o mouse sobre os cards para ver os detalhes.</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+                <div class="color-swatch bg-white rounded-lg shadow-lg overflow-hidden group">
+                    <div class="h-32" style="background-color: var(--primary);"></div>
+                    <div class="p-4">
+                        <h4 class="font-bold text-lg">Laranja Vibrante</h4>
+                        <p class="text-gray-600">Energia e Ação</p>
+                        <p class="font-mono text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">#FF4D00</p>
+                    </div>
+                </div>
+                <div class="color-swatch bg-white rounded-lg shadow-lg overflow-hidden group">
+                    <div class="h-32" style="background-color: var(--secondary);"></div>
+                    <div class="p-4">
+                        <h4 class="font-bold text-lg">Azul Elétrico</h4>
+                        <p class="text-gray-600">Confiança e Vitalidade</p>
+                         <p class="font-mono text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">#00B2FF</p>
+                    </div>
+                </div>
+                <div class="color-swatch bg-white rounded-lg shadow-lg overflow-hidden group">
+                    <div class="h-32" style="background-color: var(--accent);"></div>
+                    <div class="p-4">
+                        <h4 class="font-bold text-lg text-dark">Verde Limão</h4>
+                        <p class="text-gray-600">Saúde e Renovação</p>
+                         <p class="font-mono text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">#A2FF00</p>
+                    </div>
+                </div>
+                <div class="color-swatch bg-white rounded-lg shadow-lg overflow-hidden group">
+                    <div class="h-32" style="background-color: var(--dark);"></div>
+                    <div class="p-4">
+                        <h4 class="font-bold text-lg">Grafite Escuro</h4>
+                        <p class="text-gray-600">Profissionalismo</p>
+                         <p class="font-mono text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">#1A1A1A</p>
+                    </div>
+                </div>
+                <div class="color-swatch bg-white rounded-lg shadow-lg overflow-hidden group">
+                    <div class="h-32" style="background-color: var(--light); border: 1px solid #ddd;"></div>
+                    <div class="p-4">
+                        <h4 class="font-bold text-lg">Cinza Claro</h4>
+                        <p class="text-gray-600">Neutralidade e Foco</p>
+                         <p class="font-mono text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">#F5F5F5</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="resources" class="mb-16">
+            <h3 class="text-3xl font-bold mb-2 section-title">Recursos e Materiais de Apoio</h3>
+             <p class="text-gray-700 mb-8 pl-5">A jornada empreendedora é feita de aprendizado. Separamos uma lista de sites e artigos essenciais para capacitar nossa equipe e aprimorar o projeto.</p>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <h4 class="font-bold text-2xl mb-4 text-secondary">Sites e Portais Essenciais</h4>
+                    <div class="space-y-4">
+                        <a href="https://www.sebrae.com.br" target="_blank" class="block resource-card bg-white p-4 rounded-lg shadow">
+                            <h5 class="font-bold">Sebrae</h5>
+                            <p class="text-sm text-gray-600">A maior fonte de conhecimento para começar: cursos, ferramentas e guias de negócios.</p>
+                        </a>
+                        <a href="https://endeavor.org.br" target="_blank" class="block resource-card bg-white p-4 rounded-lg shadow">
+                             <h5 class="font-bold">Endeavor Brasil</h5>
+                            <p class="text-sm text-gray-600">Conteúdo inspirador para pensar em crescimento, inovação e estratégias de alto impacto.</p>
+                        </a>
+                        <a href="https://www.canva.com" target="_blank" class="block resource-card bg-white p-4 rounded-lg shadow">
+                            <h5 class="font-bold">Canva</h5>
+                            <p class="text-sm text-gray-600">Ferramenta de design para criar logos, posts e apresentações com visual profissional.</p>
+                        </a>
+                         <a href="https://workspace.google.com" target="_blank" class="block resource-card bg-white p-4 rounded-lg shadow">
+                            <h5 class="font-bold">Google Workspace</h5>
+                            <p class="text-sm text-gray-600">Para organizar o trabalho em equipe com Docs, Sheets e Drive de forma colaborativa.</p>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold text-2xl mb-4 text-secondary">Artigos e Leituras</h4>
+                    <div class="space-y-4">
+                        <a href="https://www.sebrae.com.br/sites/PortalSebrae/artigos/como-elaborar-um-plano-de-negocio,37d2438af1c92410VgnVCM100000b272010aRCRD" target="_blank" class="block resource-card bg-white p-4 rounded-lg shadow">
+                            <h5 class="font-bold">Como Elaborar um Plano de Negócio</h5>
+                            <p class="text-sm text-gray-600">O guia definitivo do Sebrae, detalhando cada etapa do plano. Leitura obrigatória.</p>
+                        </a>
+                         <a href="https://endeavor.org.br/planejamento-estrategico/business-model-canvas/" target="_blank" class="block resource-card bg-white p-4 rounded-lg shadow">
+                            <h5 class="font-bold">Business Model Canvas em 7 Passos</h5>
+                            <p class="text-sm text-gray-600">Aprenda a usar o canvas para visualizar e validar sua estratégia de negócio de forma ágil.</p>
+                        </a>
+                        <a href="https://rockcontent.com/br/blog/marketing-para-instagram/" target="_blank" class="block resource-card bg-white p-4 rounded-lg shadow">
+                            <h5 class="font-bold">Marketing no Instagram: Guia Completo</h5>
+                            <p class="text-sm text-gray-600">Domine nosso principal canal de vendas com dicas de conteúdo, engajamento e estratégia.</p>
+                        </a>
+                         <a href="https://blog.hubspot.com/sales/sales-pitch-examples" target="_blank" class="block resource-card bg-white p-4 rounded-lg shadow">
+                            <h5 class="font-bold">Como Fazer um Pitch de Vendas Matador</h5>
+                            <p class="text-sm text-gray-600">Estruture uma apresentação curta e convincente para "vender" o projeto a patrocinadores.</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="roadmap" class="mb-16">
+            <h3 class="text-3xl font-bold mb-2 section-title">Roadmap: Do Plano à Apresentação</h3>
+            <p class="text-gray-700 mb-10 pl-5">Este é nosso mapa para o sucesso. Um fluxograma visual que divide o projeto em fases claras e gerenciáveis, garantindo que nenhum passo importante seja esquecido.</p>
+            
+            <div class="flex flex-col lg:flex-row justify-between text-center">
+                
+                <div class="flex-1 flow-phase">
+                    <h4 class="text-lg font-bold bg-primary text-white py-2 rounded-t-lg">Fase 1: Estruturação</h4>
+                    <div class="p-4 bg-white rounded-b-lg border-b-4 border-primary shadow-lg h-full">
+                        <p class="flow-step mb-2 p-2 bg-light rounded">Brainstorming e Proposta de Valor</p>
+                        <p class="flow-step mb-2 p-2 bg-light rounded">Formação das Equipes</p>
+                        <p class="flow-step p-2 bg-light rounded">Definição de Missão, Visão e Valores</p>
+                    </div>
+                    <div class="flow-connector"></div>
+                </div>
+
+                <div class="flex-1 flow-phase lg:ml-10">
+                    <h4 class="text-lg font-bold bg-secondary text-white py-2 rounded-t-lg">Fase 2: Pesquisa</h4>
+                     <div class="p-4 bg-white rounded-b-lg border-b-4 border-secondary shadow-lg h-full">
+                        <p class="flow-step mb-2 p-2 bg-light rounded">Aplicação de Enquetes com Alunos</p>
+                        <p class="flow-step mb-2 p-2 bg-light rounded">Pesquisa de Fornecedores</p>
+                        <p class="flow-step p-2 bg-light rounded">Análise de Concorrentes</p>
+                    </div>
+                    <div class="flow-connector"></div>
+                </div>
+                
+                <div class="flex-1 flow-phase lg:ml-10">
+                    <h4 class="text-lg font-bold" style="background-color: var(--accent); color: var(--dark); padding: 0.5rem 0; border-radius: 0.5rem 0.5rem 0 0;">Fase 3: Construção</h4>
+                     <div class="p-4 bg-white rounded-b-lg border-b-4" style="border-color: var(--accent); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1); height: 100%;">
+                        <p class="flow-step mb-2 p-2 bg-light rounded">Business Model Canvas</p>
+                        <p class="flow-step mb-2 p-2 bg-light rounded">Plano de Marketing e Financeiro</p>
+                        <p class="flow-step p-2 bg-light rounded">Consolidação do Documento Final</p>
+                    </div>
+                    <div class="flow-connector"></div>
+                </div>
+                
+                 <div class="flex-1 flow-phase lg:ml-10">
+                    <h4 class="text-lg font-bold bg-dark text-white py-2 rounded-t-lg">Fase 4: Apresentação</h4>
+                    <div class="p-4 bg-white rounded-b-lg border-b-4 border-dark shadow-lg h-full">
+                        <p class="flow-step mb-2 p-2 bg-light rounded">Criação do Pitch Deck</p>
+                        <p class="flow-step mb-2 p-2 bg-light rounded">Ensaio da Apresentação</p>
+                        <p class="flow-step p-2 bg-light rounded">Reunião com Patrocinadores</p>
+                    </div>
+                    <div class="flow-connector"></div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-white border-t mt-10">
+        <div class="container mx-auto px-6 py-4 text-center text-gray-500">
+            <p>&copy; 2025 Empresa Jr. Amados - Colégio Estadual Barros Barreto.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            const navLinks = document.querySelectorAll('#mobile-menu a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
+
